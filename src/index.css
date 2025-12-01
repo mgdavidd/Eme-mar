@@ -1,0 +1,74 @@
+:root {
+  /* Beige / formal theme (coherent with Login.module.css) */
+  font-family: "Segoe UI", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #4a3b2e; /* dark brown text */
+  background-color: #f8f2ea; /* page beige background */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+  font-weight: 500;
+  color: #6b5a4b; /* warm brown */
+  text-decoration: underline;
+}
+a:hover {
+  color: #4a3b2e;
+}
+
+/* Page base */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg, #f8f2ea);
+}
+
+/* Headings */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #4a3b2e;
+}
+
+/* Default button styling to match login */
+button {
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  background: #d8c3a5;
+  color: #4a3b2e;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+button:hover {
+  background: #c7b091;
+}
+
+/* Ocultar scrollbar pero permitir scroll */
+html, body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* WebKit: Chrome, Safari, Opera */
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #4a3b2e;
+    background-color: #f8f2ea;
+  }
+}

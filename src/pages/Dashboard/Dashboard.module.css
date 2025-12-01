@@ -1,0 +1,551 @@
+/* Dashboard.module.css */
+
+.container {
+  min-height: 100vh;
+  background: #f8f2ea;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.header {
+  background: #fffdf9;
+  border-bottom: 2px solid #e8dcc8;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 24px;
+  color: #4a3b2e;
+  font-weight: 600;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  padding: 20px;
+  padding-bottom: 90px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 12px;
+    padding-bottom: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 10px;
+    padding-bottom: 80px;
+  }
+}
+
+/* Balance Card */
+.balanceCard {
+  background: #fffdf9;
+  border: 2px solid #e8dcc8;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .balanceCard {
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceCard {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+}
+
+.balanceTitle {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: #4a3b2e;
+  text-align: center;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .balanceTitle {
+    font-size: 22px;
+    margin: 0 0 15px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceTitle {
+    font-size: 20px;
+    margin: 0 0 12px 0;
+  }
+}
+
+.balanceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .balanceGrid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceGrid {
+    gap: 12px;
+  }
+}
+
+.balanceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.balanceLabel {
+  font-size: 16px;
+  color: #6b5a4b;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .balanceLabel {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceLabel {
+    font-size: 13px;
+  }
+}
+
+.balanceAmount {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .balanceAmount {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balanceAmount {
+    font-size: 22px;
+  }
+}
+
+.balanceAmount.positive {
+  color: #2d8659;
+}
+
+.balanceAmount.negative {
+  color: #c74444;
+}
+
+/* Movements Card */
+.movementsCard {
+  background: #fffdf9;
+  border: 2px solid #e8dcc8;
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .movementsCard {
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementsCard {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+}
+
+.movementsTitle {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #4a3b2e;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .movementsTitle {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementsTitle {
+    font-size: 15px;
+    margin: 0 0 10px 0;
+  }
+}
+
+.movementsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .movementsList {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementsList {
+    gap: 8px;
+  }
+}
+
+.movementItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f2ea;
+  border-radius: 10px;
+  border: 1px solid #e8dcc8;
+}
+
+@media (max-width: 768px) {
+  .movementItem {
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementItem {
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+.movementIcon {
+  flex-shrink: 0;
+}
+
+.iconCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .iconCircle {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .iconCircle {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.iconCircle.iconOut {
+  background: #ffe5e5;
+  color: #c74444;
+}
+
+.iconCircle.iconIn {
+  background: #e5f5ed;
+  color: #2d8659;
+}
+
+.movementDetails {
+  flex: 1;
+  font-size: 14px;
+  color: #4a3b2e;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .movementDetails {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementDetails {
+    font-size: 12px;
+  }
+}
+
+.movementClient {
+  font-weight: 600;
+}
+
+.movementDescription {
+  color: #6b5a4b;
+}
+
+.movementAmount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4a3b2e;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .movementAmount {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementAmount {
+    font-size: 13px;
+  }
+}
+
+/* View Cards (para las vistas de placeholder) */
+.viewCard {
+  background: #fffdf9;
+  border: 2px solid #e8dcc8;
+  border-radius: 14px;
+  padding: 30px;
+  min-height: 300px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .viewCard {
+    padding: 20px;
+    min-height: 250px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .viewCard {
+    padding: 15px;
+    min-height: 200px;
+  }
+}
+
+.viewTitle {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  color: #4a3b2e;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .viewTitle {
+    font-size: 22px;
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .viewTitle {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
+}
+
+.viewDescription {
+  color: #6b5a4b;
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .viewDescription {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .viewDescription {
+    font-size: 13px;
+  }
+}
+
+/* Bottom Navigation */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fffdf9;
+  border-top: 2px solid #e8dcc8;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 8px 0;
+  box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  transform: translateY(-2px);
+}
+
+.navButtonActive {
+  transform: scale(1.05);
+}
+
+.navLabel {
+  font-size: 11px;
+  color: #6b5a4b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .navLabel {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navLabel {
+    font-size: 9px;
+  }
+}
+
+.navLabelActive {
+  color: #4a3b2e;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .header {
+    padding: 12px 15px;
+  }
+
+  .headerTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .headerTitle {
+    font-size: 18px;
+  }
+}
+
+/* Agregar estos estilos al final de tu Dashboard.module.css */
+
+/* Icono de crédito (azul) */
+.iconCircle.iconCredit {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+/* Fecha del movimiento */
+.movementDate {
+  font-size: 12px;
+  color: #8b7355;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .movementDate {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movementDate {
+    font-size: 10px;
+  }
+}
+
+/* Descripción mejorada */
+.movementDescription {
+  color: #4a3b2e;
+  font-weight: 500;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+/* Montos con colores */
+.movementAmount.amountPositive {
+  color: #2d8659;
+}
+
+.movementAmount.amountNegative {
+  color: #c74444;
+}
+
+/* Estado de carga */
+.noMovements {
+  text-align: center;
+  padding: 30px 20px;
+  color: #8b7355;
+  font-size: 14px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .noMovements {
+    padding: 20px 15px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .noMovements {
+    padding: 15px 10px;
+    font-size: 12px;
+  }
+}

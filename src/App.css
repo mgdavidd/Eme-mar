@@ -1,0 +1,116 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Logo visuals preserved */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 1.2em rgba(103, 85, 60, 0.25));
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 1.2em rgba(97, 218, 186, 0.12));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Global card / page styles matching Login.module.css */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f2ea;
+}
+
+.card {
+  background: #fffdf9;
+  border: 2px solid #e8dcc8;
+  border-radius: 14px;
+  padding: 40px;
+  width: 360px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 28px;
+  color: #4a3b2e;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 6px 0 20px;
+  color: #6b5a4b;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #4a3b2e;
+}
+
+.input {
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #d8c3a5;
+  background: #fff;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.input:focus {
+  border-color: #c7b091;
+  outline: none;
+}
+
+.button {
+  background: #d8c3a5;
+  color: #4a3b2e;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: #c7b091;
+}
+
+.read-the-docs {
+  color: #6b5a4b;
+}

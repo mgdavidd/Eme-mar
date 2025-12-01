@@ -1,0 +1,142 @@
+.card {
+  background: #fffdf9;
+  border: 2px solid #e8dcc8;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 750px;
+}
+
+/* Panel derecho */
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+/* Parte superior (nombre + info) */
+.info {
+  display: grid;
+  grid-template-columns: 1fr; /* Simple columna */
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a3b2e;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e8dcc8;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.label {
+  color: #6b5a4b;
+  font-weight: 600;
+}
+
+.value {
+  color: #4a3b2e;
+  font-weight: 600;
+}
+
+.low {
+  color: #c74444;
+}
+
+/* Botones */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e8dcc8;
+  margin-top: 4px;
+}
+
+.actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  font-size: 14px;
+}
+
+/* Hover */
+.editButton:hover {
+  background: #e5f5ed;
+  color: #2d8659;
+}
+
+.deleteButton:hover {
+  background: #ffe5e5;
+  color: #c74444;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+
+  .card {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .imageWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .row {
+    font-size: 13px;
+  }
+
+  .actions button {
+    font-size: 13px;
+    padding: 5px 8px;
+  }
+}
+
+/* ... (mantén todo lo anterior) ... */
+
+/* Botón de surtir */
+.supplyButton:hover {
+  background: #e5f5ff;
+  color: #0066cc;
+}
+
+/* Orden de botones en el contenedor */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e8dcc8;
+  margin-top: 4px;
+}
+
+.actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  font-size: 14px;
+}
