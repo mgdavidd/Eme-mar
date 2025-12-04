@@ -72,3 +72,19 @@ body::-webkit-scrollbar {
     background-color: #f8f2ea;
   }
 }
+
+/* Safe areas para evitar que el contenido se esconda bajo el notch o la barra del sistema */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+#root {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}

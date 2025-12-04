@@ -14,6 +14,21 @@ import {
 } from "lucide-react";
 import styles from "./Movements.module.css";
 
+const formatDateMinus4 = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString.replace(" ", "T"));
+  date.setHours(date.getHours() - 5);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
+
 export default function Movements() {
   const [activeTab, setActiveTab] = useState("movements");
   const [movements, setMovements] = useState([]);
@@ -23,37 +38,34 @@ export default function Movements() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   
-  // Modales
   const [showSaleModal, setShowSaleModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showAdjustModal, setShowAdjustModal] = useState(false);
   const [showPaymentsDetailModal, setShowPaymentsDetailModal] = useState(false);
-  
-  // Alertas
+
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
-  
-  // Formularios
+
   const [saleForm, setSaleForm] = useState({
     client_id: 0,
     items: [],
     is_credit: false
   });
-  
+
   const [paymentForm, setPaymentForm] = useState({
     credit_sale_id: "",
     amount: 0
   });
-  
+
   const [adjustForm, setAdjustForm] = useState({
     amount: "",
     description: ""
   });
-  
+
   const [saleItem, setSaleItem] = useState({
     product_id: "",
     quantity: ""
   });
-  
+
   const [selectedCreditSale, setSelectedCreditSale] = useState(null);
   const [paymentsDetail, setPaymentsDetail] = useState([]);
 
@@ -116,7 +128,6 @@ export default function Movements() {
     }
   };
 
-  // Crear venta
   const handleCreateSale = async () => {
     if (!(saleForm.client_id > 0) || saleForm.items.length === 0) {
       showAlert("warning", "Selecciona un cliente y agrega al menos un producto");
@@ -146,7 +157,6 @@ export default function Movements() {
     }
   };
 
-  // Pagar crédito
   const handlePayCredit = async () => {
     if (!paymentForm.credit_sale_id || !paymentForm.amount || parseFloat(paymentForm.amount) <= 0) {
       showAlert("warning", "Ingresa un monto válido");
@@ -176,7 +186,6 @@ export default function Movements() {
     }
   };
 
-  // Ajustar saldo
   const handleAdjustBalance = async () => {
     if (!adjustForm.amount || !adjustForm.description.trim()) {
       showAlert("warning", "Completa todos los campos");
@@ -205,7 +214,6 @@ export default function Movements() {
     }
   };
 
-  // Agregar producto a venta
   const handleAddProductToSale = () => {
     if (!saleItem.product_id || !saleItem.quantity) {
       showAlert("warning", "Selecciona un producto y cantidad");
@@ -223,7 +231,6 @@ export default function Movements() {
     setSaleItem({ product_id: "", quantity: "" });
   };
 
-  // Ver detalles de pagos
   const handleViewPayments = async (creditSale) => {
     try {
       const res = await fetch(`https://server-eme-mar.onrender.com/moves/credit/payments/${creditSale.sale_id}`);
@@ -237,7 +244,6 @@ export default function Movements() {
     }
   };
 
-  // Búsqueda
   const filteredMovements = movements.filter(m => {
     const searchLower = searchTerm.toLowerCase();
     return m.descripcion?.toLowerCase().includes(searchLower);
@@ -277,7 +283,6 @@ export default function Movements() {
 
   return (
     <div className={styles.movements}>
-      {/* Alerta Global */}
       {alert.show && (
         <div className={`${styles.globalAlert} ${styles[`alert${alert.type.charAt(0).toUpperCase() + alert.type.slice(1)}`]}`}>
           {getAlertIcon()}
@@ -288,7 +293,6 @@ export default function Movements() {
         </div>
       )}
 
-      {/* Tabs */}
       <div className={styles.tabs}>
         <button
           className={`${styles.tab} ${activeTab === "movements" ? styles.tabActive : ""}`}
@@ -304,7 +308,6 @@ export default function Movements() {
         </button>
       </div>
 
-      {/* Barra de acciones */}
       <div className={styles.actionsBar}>
         <div className={styles.searchContainer}>
           <Search size={18} />
@@ -337,7 +340,6 @@ export default function Movements() {
         </div>
       </div>
 
-      {/* Contenido según tab activo */}
       {activeTab === "movements" ? (
         <div className={styles.movementsList}>
           {loading ? (
@@ -353,7 +355,9 @@ export default function Movements() {
 
                 <div className={styles.movementContent}>
                   <p className={styles.movementDescription}>{movement.descripcion}</p>
-                  <p className={styles.movementDate}>{movement.date}</p>
+
+                  {/* FECHA CORREGIDA */}
+                  <p className={styles.movementDate}>{formatDateMinus4(movement.date)}</p>
                 </div>
 
                 <div className={`${styles.movementAmount} ${
@@ -379,7 +383,9 @@ export default function Movements() {
                   <div className={styles.creditSaleHeader}>
                     <div>
                       <h4 className={styles.creditSaleClient}>{sale.client_name}</h4>
-                      <p className={styles.creditSaleDate}>{sale.date}</p>
+
+                      {/* FECHA CORREGIDA */}
+                      <p className={styles.creditSaleDate}>{formatDateMinus4(sale.date)}</p>
                     </div>
                     {isPaid && (
                       <span className={styles.paidBadge}>
@@ -434,7 +440,6 @@ export default function Movements() {
         </div>
       )}
 
-      {/* Modal Nueva Venta */}
       {showSaleModal && (
         <div className={styles.modalOverlay} onClick={() => setShowSaleModal(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
@@ -536,7 +541,6 @@ export default function Movements() {
         </div>
       )}
 
-      {/* Modal Pagar Crédito */}
       {showPaymentModal && (
         <div className={styles.modalOverlay} onClick={() => setShowPaymentModal(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
@@ -577,7 +581,6 @@ export default function Movements() {
         </div>
       )}
 
-      {/* Modal Ajustar Saldo */}
       {showAdjustModal && (
         <div className={styles.modalOverlay} onClick={() => setShowAdjustModal(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
@@ -629,7 +632,6 @@ export default function Movements() {
         </div>
       )}
 
-      {/* Modal Ver Pagos */}
       {showPaymentsDetailModal && selectedCreditSale && (
         <div className={styles.modalOverlay} onClick={() => setShowPaymentsDetailModal(false)}>
           <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
@@ -652,9 +654,13 @@ export default function Movements() {
                     <div key={payment.id} className={styles.paymentItem}>
                       <CreditCard size={20} className={styles.paymentIcon} />
                       <div className={styles.paymentInfo}>
-                        <span className={styles.paymentDate}>{payment.date}</span>
-                        {/*formato colomabia punto mil y coma decimal*/}
-                        <span className={styles.paymentAmount}>${payment.amount.tolcal}</span>
+
+                        {/* FECHA CORREGIDA */}
+                        <span className={styles.paymentDate}>{formatDateMinus4(payment.date)}</span>
+
+                        <span className={styles.amount}>
+                          {payment.amount.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
+                        </span>
                       </div>
                     </div>
                   ))}

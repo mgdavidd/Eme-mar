@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import {
   Package,
@@ -18,6 +17,21 @@ import Inventory from "../Inventory/Inventory";
 import Products from "../Products/Products";
 import Movements from "../Movements/Movements";
 
+const formatDateMinus4 = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString.replace(" ", "T"));
+  date.setHours(date.getHours() - 5);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
+
 function InicioView() {
   const [balance, setBalance] = useState({ balance: 0, amount_owed: 0 });
   const [recentMovements, setRecentMovements] = useState([]);
@@ -29,7 +43,6 @@ function InicioView() {
 
   const loadData = async () => {
     try {
-      // Cargar información de cuenta
       const accountRes = await fetch("https://server-eme-mar.onrender.com/moves/account");
       const accountData = await accountRes.json();
       setBalance({
@@ -37,7 +50,6 @@ function InicioView() {
         amount_owed: accountData.amount_owed || 0
       });
 
-      // Cargar movimientos recientes
       const movesRes = await fetch("https://server-eme-mar.onrender.com/moves/recent");
       const movesData = await movesRes.json();
       setRecentMovements(movesData || []);
@@ -49,7 +61,6 @@ function InicioView() {
   };
 
   const getMovementIcon = (movement) => {
-    // Detectar si es abono a crédito
     if (movement.descripcion?.includes("Abono a crédito")) {
       return (
         <div className={`${styles.iconCircle} ${styles.iconCredit}`}>
@@ -57,8 +68,7 @@ function InicioView() {
         </div>
       );
     }
-    
-    // Movimiento normal según tipo
+
     if (movement.type === "ingreso") {
       return (
         <div className={`${styles.iconCircle} ${styles.iconIn}`}>
@@ -66,7 +76,7 @@ function InicioView() {
         </div>
       );
     }
-    
+
     return (
       <div className={`${styles.iconCircle} ${styles.iconOut}`}>
         <TrendingDown size={20} />
@@ -87,14 +97,14 @@ function InicioView() {
           <div className={styles.balanceItem}>
             <span className={styles.balanceLabel}>Saldo</span>
             <span className={`${styles.balanceAmount} ${styles.positive}`}>
-              {formatCurrency(balance.balance.toLocaleString("es-CO", { style: "currency", currency: "COP" }))}
+              {formatCurrency(balance.balance)}
             </span>
           </div>
 
           <div className={styles.balanceItem}>
             <span className={styles.balanceLabel}>Por Cobrar</span>
             <span className={`${styles.balanceAmount} ${styles.negative}`}>
-              {formatCurrency(balance.amount_owed.toLocaleString("es-CO", { style: "currency", currency: "COP" }))}
+              {formatCurrency(balance.amount_owed)}
             </span>
           </div>
         </div>
@@ -120,8 +130,10 @@ function InicioView() {
                   <div className={styles.movementDescription}>
                     {movement.descripcion}
                   </div>
+
+                  {/* FECHA CORREGIDA */}
                   <div className={styles.movementDate}>
-                    {movement.date}
+                    {formatDateMinus4(movement.date)}
                   </div>
                 </div>
 
@@ -129,7 +141,7 @@ function InicioView() {
                   movement.type === "ingreso" ? styles.amountPositive : styles.amountNegative
                 }`}>
                   {movement.type === "ingreso" ? "+" : "-"}
-                  {formatCurrency(movement.amount.toLocaleString("es-CO", { style: "currency", currency: "COP" }))}
+                  {formatCurrency(movement.amount)}
                 </div>
               </div>
             ))}
@@ -140,28 +152,11 @@ function InicioView() {
   );
 }
 
-
-// Componente para la vista de Inventario
-function InventarioView() {
-  return (
-    <Inventory />
-  );
-}
-
-// Componente para la vista de Productos
-function ProductosView() {
-  return <Products />;
-}
-
-// Componente para la vista de Movimientos
-function MovimientosView() {
-  return <Movements/>
-}
-
-// Componente para la vista de Clientes
-function ClientesView() {
-  return <Clients />
-}
+// Views
+function InventarioView() { return <Inventory />; }
+function ProductosView() { return <Products />; }
+function MovimientosView() { return <Movements/>; }
+function ClientesView() { return <Clients />; }
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("caja");
@@ -174,35 +169,25 @@ export default function Dashboard() {
     { id: "clientes", label: "Clientes", icon: User },
   ];
 
-  // Función para renderizar la vista actual
   const renderView = () => {
     switch (activeTab) {
-      case "caja":
-        return <InicioView />;
-      case "inventario":
-        return <InventarioView />;
-      case "productos":
-        return <ProductosView />;
-      case "movimientos":
-        return <MovimientosView />;
-      case "clientes":
-        return <ClientesView />;
-      default:
-        return <InicioView />;
+      case "caja": return <InicioView />;
+      case "inventario": return <InventarioView />;
+      case "productos": return <ProductosView />;
+      case "movimientos": return <MovimientosView />;
+      case "clientes": return <ClientesView />;
+      default: return <InicioView />;
     }
   };
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
+    <div className={`${styles.container} safe-area`}>
       <header className={styles.header}>
         <h1 className={styles.headerTitle}>Eme Mar</h1>
       </header>
 
-      {/* Main Content - Renderiza la vista completa según el tab activo */}
       <main className={styles.main}>{renderView()}</main>
 
-      {/* Bottom Navigation */}
       <nav className={styles.bottomNav}>
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -212,20 +197,14 @@ export default function Dashboard() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`${styles.navButton} ${
-                isActive ? styles.navButtonActive : ""
-              }`}
+              className={`${styles.navButton} ${isActive ? styles.navButtonActive : ""}`}
             >
               <Icon
                 size={24}
                 strokeWidth={isActive ? 2.5 : 2}
                 color={isActive ? "#4a3b2e" : "#6b5a4b"}
               />
-              <span
-                className={`${styles.navLabel} ${
-                  isActive ? styles.navLabelActive : ""
-                }`}
-              >
+              <span className={`${styles.navLabel} ${isActive ? styles.navLabelActive : ""}`}>
                 {tab.label}
               </span>
             </button>

@@ -549,3 +549,7 @@
     font-size: 12px;
   }
 }
+
+.bottomNav {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+}

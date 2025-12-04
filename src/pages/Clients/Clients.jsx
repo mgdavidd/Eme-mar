@@ -3,6 +3,24 @@ import { Plus, FileText, Trash2, Pencil, Search, TrendingDown, TrendingUp } from
 import styles from "./Clients.module.css";
 import Alert from "../../components/Alert";
 
+// =====================================================
+//   FUNCIÓN PARA AJUSTAR FECHA -4 HORAS
+// =====================================================
+const formatDateMinus4 = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString.replace(" ", "T"));
+  date.setHours(date.getHours() - 5);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
+
 export default function Clients() {
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState("");
@@ -461,8 +479,13 @@ export default function Clients() {
                           <p className={styles.historyItemDescription}>
                             {movement.descripcion}
                           </p>
-                          <p className={styles.historyItemDate}>{movement.date}</p>
+
+                          {/* FECHA CORREGIDA */}
+                          <p className={styles.historyItemDate}>
+                            {formatDateMinus4(movement.date)}
+                          </p>
                         </div>
+
                         <div
                           className={`${styles.historyItemAmount} ${
                             movement.type === "ingreso"
@@ -491,9 +514,12 @@ export default function Clients() {
                       return (
                         <div key={sale.sale_id} className={styles.creditSaleItem}>
                           <div className={styles.creditSaleItemHeader}>
+
+                            {/* FECHA CORREGIDA */}
                             <span className={styles.creditSaleItemDate}>
-                              {sale.date}
+                              {formatDateMinus4(sale.date)}
                             </span>
+
                             {isPaid ? (
                               <span className={styles.creditPaidBadge}>✓ Pagado</span>
                             ) : (
@@ -506,9 +532,11 @@ export default function Clients() {
                               </button>
                             )}
                           </div>
+
                           <div className={styles.creditSaleItemDescription}>
                             {sale.description}
                           </div>
+
                           <div className={styles.creditSaleItemAmounts}>
                             <div className={styles.creditAmountRow}>
                               <span>Total:</span>

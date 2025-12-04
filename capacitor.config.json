@@ -1,0 +1,6 @@
+{
+  "appId": "com.ememar.app",
+  "appName": "eme-mar",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
